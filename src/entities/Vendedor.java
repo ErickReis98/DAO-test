@@ -1,5 +1,6 @@
 package entities;
 
+<<<<<<< HEAD
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -7,6 +8,12 @@ import java.util.Objects;
 public class Vendedor implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+=======
+import java.util.Date;
+import java.util.Objects;
+
+public class Vendedor{
+>>>>>>> c283f5c8da1c9f122dbc27a4750d8f2f42aa66d6
 
 	private int id;
 	private String nome;
@@ -17,6 +24,10 @@ public class Vendedor implements Serializable{
 	
 	public Vendedor(int id, String nome, String email, Date dataAniversario, double salario,
 			Departamento departamento) {
+<<<<<<< HEAD
+=======
+		super();
+>>>>>>> c283f5c8da1c9f122dbc27a4750d8f2f42aa66d6
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -75,7 +86,11 @@ public class Vendedor implements Serializable{
 
 	@Override
 	public int hashCode() {
+<<<<<<< HEAD
 		return Objects.hash(id);
+=======
+		return Objects.hash(id, nome);
+>>>>>>> c283f5c8da1c9f122dbc27a4750d8f2f42aa66d6
 	}
 
 	@Override
@@ -87,7 +102,11 @@ public class Vendedor implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Vendedor other = (Vendedor) obj;
+<<<<<<< HEAD
 		return id == other.id;
+=======
+		return id == other.id && Objects.equals(nome, other.nome);
+>>>>>>> c283f5c8da1c9f122dbc27a4750d8f2f42aa66d6
 	}
 
 	@Override

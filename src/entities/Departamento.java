@@ -6,7 +6,10 @@ import java.util.Objects;
 public class Departamento implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> c283f5c8da1c9f122dbc27a4750d8f2f42aa66d6
 	private int id;
 	private String nome;
 	
@@ -47,11 +50,14 @@ public class Departamento implements Serializable{
 		Departamento other = (Departamento) obj;
 		return id == other.id && Objects.equals(nome, other.nome);
 	}
+<<<<<<< HEAD
 
 	@Override
 	public String toString() {
 		return "Departamento [id=" + id + ", nome=" + nome + "]";
 	}
+=======
+>>>>>>> c283f5c8da1c9f122dbc27a4750d8f2f42aa66d6
 	
 	
 	
