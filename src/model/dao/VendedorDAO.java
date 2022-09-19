@@ -14,5 +14,6 @@ public interface VendedorDAO {
 
 	Vendedor findById(Integer id);
 
+	
 	List<Vendedor> findAll();
 }
