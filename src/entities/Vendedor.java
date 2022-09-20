@@ -25,6 +25,10 @@ public class Vendedor implements Serializable {
 		this.departamento = departamento;
 	}
 
+	public Vendedor() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getId() {
 		return id;
 	}
