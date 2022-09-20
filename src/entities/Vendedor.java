@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -8,6 +9,7 @@ public class Vendedor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	private int id;
 	private String nome;
 	private String email;
@@ -94,10 +96,14 @@ public class Vendedor implements Serializable {
 		return id == other.id;
 	}
 
+
+	
+	
 	@Override
 	public String toString() {
-		return "Vendedor [id=" + id + ", nome=" + nome + ", email=" + email + ", dataAniversario=" + dataAniversario
-				+ ", salario=" + salario + ", departamento=" + departamento.getName() + "]";
+		return "Vendedor ID: " + id + "\nNome: " + nome + "\nEmail: " + email + "\nData de Aniversario: " + sdf.format(dataAniversario)
+				+ "\nSalario: R$ " + salario + "\nDepartamento: " + departamento.getNome();
 	}
+
 
 }

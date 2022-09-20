@@ -10,9 +10,9 @@ public class Departamento implements Serializable{
 	private int id;
 	private String nome;
 	
-	public Departamento(int id, String name) {
+	public Departamento(int id, String nome) {
 		this.id = id;
-		this.nome = name;
+		this.nome = nome;
 	}
 
 	public Departamento() {
@@ -27,12 +27,12 @@ public class Departamento implements Serializable{
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setName(String name) {
-		this.nome = name;
+	public void setName(String nome) {
+		this.nome = nome;
 	}
 
 	@Override
