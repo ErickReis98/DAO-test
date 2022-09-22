@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +26,42 @@ public class VendedorDAOJdbc implements VendedorDAO {
 
 	@Override
 	public void insert(Vendedor dep) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		
+		try {
+			st = conn.prepareStatement(
+				"Insert into vendedor "
+				+ "(nome, email, dataAniversario, salario, idDepartamento) "
+				+ "values "
+				+ "(?, ?, ?, ?, ?)",
+				Statement.RETURN_GENERATED_KEYS);
+			
+			st.setString(1, dep.getNome());
+			st.setString(2, dep.getEmail());
+			st.setDate(3, new java.sql.Date(dep.getDataAniversario().getTime()));
+			st.setDouble(4, dep.getSalario());
+			st.setInt(5, dep.getDepartamento().getId());
+			
+			int linhasAfetadas = st.executeUpdate();
+			
+			if(linhasAfetadas > 0) {
+				ResultSet rs = st.getGeneratedKeys();
+				if(rs.next()) {
+					int id = rs.getInt(1);
+					dep.setId(id);
+				DB.closeResultSet(rs);
+				}
+			}else {
+				System.out.println("Erro inesperado, nenhuma linha foi afetada.");
+			}
+			
+		}catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}finally {
+			DB.closeStatement(st);
+		}
+		
+		
 
 	}
 
@@ -55,7 +91,7 @@ public class VendedorDAOJdbc implements VendedorDAO {
 			if (rs.next()) {
 				Departamento dep = depInstanciado(rs);
 				Vendedor obj = vendInstanciado(rs, dep);
-				
+
 				return obj;
 			}
 			return null;
@@ -88,8 +124,36 @@ public class VendedorDAOJdbc implements VendedorDAO {
 
 	@Override
 	public List<Vendedor> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement("Select vendedor.*, departamento.nomeDep "
+					+ "from vendedor inner join departamento on vendedor.idDepartamento = departamento.id "
+					+ "order by nome");
+
+			rs = st.executeQuery();
+
+			List<Vendedor> list = new ArrayList<>();
+			Map<Integer, Departamento> map = new HashMap<>();
+
+			while (rs.next()) {
+				Departamento dep = map.get(rs.getInt("idDepartamento"));
+
+				if (dep == null) {
+					dep = depInstanciado(rs);
+					map.put(rs.getInt("idDepartamento"), dep);
+				}
+				Vendedor obj = vendInstanciado(rs, dep);
+				list.add(obj);
+			}
+			return list;
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeResultSet(rs);
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
@@ -99,19 +163,18 @@ public class VendedorDAOJdbc implements VendedorDAO {
 		try {
 			st = conn.prepareStatement("Select vendedor.*, departamento.nomeDep "
 					+ "from vendedor inner join departamento on vendedor.idDepartamento = departamento.id "
-					+ "where idDepartamento = ? "
-					+ "order by nome");
+					+ "where idDepartamento = ? " + "order by nome");
 
 			st.setInt(1, departamento.getId());
 			rs = st.executeQuery();
-			
+
 			List<Vendedor> list = new ArrayList<>();
 			Map<Integer, Departamento> map = new HashMap<>();
-			
+
 			while (rs.next()) {
 				Departamento dep = map.get(rs.getInt("idDepartamento"));
-				
-				if(dep == null) {
+
+				if (dep == null) {
 					dep = depInstanciado(rs);
 					map.put(rs.getInt("idDepartamento"), dep);
 				}

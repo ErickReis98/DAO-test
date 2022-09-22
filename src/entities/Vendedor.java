@@ -10,14 +10,14 @@ public class Vendedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-	private int id;
+	private Integer id;
 	private String nome;
 	private String email;
 	private Date dataAniversario;
 	private double salario;
 	private Departamento departamento;
 
-	public Vendedor(int id, String nome, String email, Date dataAniversario, double salario,
+	public Vendedor(Integer id, String nome, String email, Date dataAniversario, double salario,
 			Departamento departamento) {
 		this.id = id;
 		this.nome = nome;
