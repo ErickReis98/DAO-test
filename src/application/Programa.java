@@ -20,7 +20,7 @@ public class Programa {
 
 		System.out.println();
 
-		Departamento departamento = new Departamento(2, "Lavanderia");
+		Departamento departamento = new Departamento(1, "Lavanderia");
 		List<Vendedor> list = vendedorDao.findByDepartamento(departamento);
 		for (Vendedor obj : list) {
 			System.out.println(obj);
@@ -37,12 +37,15 @@ public class Programa {
 		
 		
 		System.out.println("============= Teste Insert");
-		Vendedor novoVendedor = new Vendedor(null, "Alencar", "alencarfilho@terra.com.br", new Date(), 4500.00, departamento); 
+		Vendedor novoVendedor = new Vendedor(null, "Rute Rodrigues da Silva", "ag65rr71@gmail.com", new Date(), 100.00, departamento); 
 		vendedorDao.insert(novoVendedor);
 		System.out.println("Inserido! Novo id = "+ novoVendedor.getId());
 		
 		
-		
+		System.out.println("============= Teste Vendedor");
+		vendedor = vendedorDao.findById(5);
+		vendedor.setNome("Alencar Gomes dos Reis Filho");
+		vendedorDao.update(vendedor);
 		
 	}
 
