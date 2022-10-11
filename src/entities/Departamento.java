@@ -7,10 +7,10 @@ public class Departamento implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private int id;
+	private Integer id;
 	private String nome;
 	
-	public Departamento(int id, String nome) {
+	public Departamento(Integer id, String nome) {
 		this.id = id;
 		this.nome = nome;
 	}
@@ -31,7 +31,7 @@ public class Departamento implements Serializable{
 		return nome;
 	}
 
-	public void setName(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
@@ -55,7 +55,7 @@ public class Departamento implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Departamento [id=" + id + ", nome=" + nome + "]";
+		return "Departamento ID: " + id + "\nNome do departamento: " + nome;
 	}
 
 	

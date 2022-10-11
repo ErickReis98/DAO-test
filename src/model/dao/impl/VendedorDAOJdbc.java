@@ -152,7 +152,7 @@ public class VendedorDAOJdbc implements VendedorDAO {
 	private Departamento depInstanciado(ResultSet rs) throws SQLException {
 		Departamento dep = new Departamento();
 		dep.setId(rs.getInt("idDepartamento"));
-		dep.setName(rs.getString("nomeDep"));
+		dep.setNome(rs.getString("nomeDep"));
 		return dep;
 	}
 
@@ -173,7 +173,6 @@ public class VendedorDAOJdbc implements VendedorDAO {
 
 			while (rs.next()) {
 				Departamento dep = map.get(rs.getInt("idDepartamento"));
-
 				if (dep == null) {
 					dep = depInstanciado(rs);
 					map.put(rs.getInt("idDepartamento"), dep);
