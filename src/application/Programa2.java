@@ -32,8 +32,10 @@ public class Programa2 {
 		
 		
 		System.out.println("============= Teste Update");
-		departamento = depDao.findById(6);
-		departamento.setNome("Eletroportáteis");
+		System.out.print("Digite o id do departamento que deseja alterar: ");
+		departamento = depDao.findById(sc.nextInt());
+		System.out.println("Digite o novo nome do departamento: ");
+		departamento.setNome(sc.next());
 		depDao.update(departamento);
 		
 		

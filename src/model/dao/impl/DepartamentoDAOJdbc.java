@@ -41,14 +41,29 @@ public class DepartamentoDAOJdbc implements DepartamentoDAO {
 
 	@Override
 	public void update(Departamento dep) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement("update departamento set nomeDep = ? where id = ?");
+			st.setString(1, dep.getNome());
+			st.setInt(2, dep.getId());
+			
+			int linhas = st.executeUpdate();
+			if(linhas == 0) {
+				System.out.println("Nenhum registro foi alterado.");
+			}else {
+				System.out.println(linhas + " registros altearados.");
+			}
+			
+		}catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
 
 	}
 
 	@Override
 	public void deleteById(Integer id) {
 		PreparedStatement st = null;
-		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(""
 					+ "delete from departamento "
@@ -63,7 +78,6 @@ public class DepartamentoDAOJdbc implements DepartamentoDAO {
 		}catch(SQLException e) {
 			throw new DbException(e.getMessage());
 		}finally {
-			DB.closeResultSet(rs);
 			DB.closeStatement(st);
 		}
 	}
